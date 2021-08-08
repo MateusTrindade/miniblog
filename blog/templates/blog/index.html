@@ -1,0 +1,17 @@
+{% extends "geral.html" %}
+{% block corpo %}
+    <div class='ultimas'>
+      <h2>Ultimas Postagens</h2>
+      {% if ultimos_artigos %}
+        <ul>
+          {% for postagem in ultimos_artigos %}
+          <li>
+            <a href="{{postagem.get_absolute_url}}">{{ postagem.titulo }}</a> por <a href="{{postagem.autor.get_absolute_url}}">{{ postagem.autor }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Não há artigos para exibir.</p>
+      {% endif %}
+    </div>
+{% endblock %}

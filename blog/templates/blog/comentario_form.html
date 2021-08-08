@@ -1,0 +1,12 @@
+{% extends "geral.html" %}
+
+{% block corpo %}
+  <h2><a href="{% url 'postagem-detail' post.pk %}">{{ post.titulo }}</a></h2>
+  <h3>Comentario:</h3>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.conteudo }}
+    <br>
+    <input type="submit" class="btn btn-primary" value="Comentar">
+  </form>
+{% endblock %}

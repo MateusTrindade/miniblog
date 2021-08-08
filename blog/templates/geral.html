@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}" />
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-10">
+		<div class="row">
+			<div class="banner">BANNER</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class='sidebar'>
+					<ul>
+					  <li><a href="{% url 'index' %}">Home</a></li>
+					  <li><a href="{% url 'postagens' %}">Todas as postagens</a></li>
+					  <li><a href="{% url 'autores' %}">Todos os autores</a></li>
+					  {% if user.is_authenticated %}
+						  <li>User: {{ user.get_username }}</li>
+						  <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+					  {% else %}
+						  <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+					  {% endif %}
+					</ul>
+				 </div>
+			</div>
+			<div class="col-8">
+				<div class="corpo">
+					{% block corpo %}{% endblock %}
+				</div>
+			</div>
+			<div class="col">
+				<div class='sobre'>
+					<p><strong>Sobre:</strong></p>
+					<p>Esse projeto foi desenvolvido utilizando o framework
+					Django para proporcionar uma aplicação capaz de exibir postagens, autores
+					e permitir a realização de comentarios por usuários logados.
+					</p>
+				</div>
+			</div>
+		</div>
+	  </div>
+	  <div class="col"></div>
+    </div>
+</div>
+  {% if is_paginated %}
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; primeira</a>
+            <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">proxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">ultima &raquo;</a>
+        {% endif %}
+    </span>
+    {% endif %}
+  </div>
+</body>
+</html>

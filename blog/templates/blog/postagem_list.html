@@ -1,0 +1,17 @@
+{% extends "geral.html" %}
+{% block corpo %}
+<h2>Todas as postagens</h2>
+    {% if postagem_list %}
+        <ul>
+            {% for postagem in postagem_list %}
+            <li>
+              <a href='{{postagem.get_absolute_url}}'>
+                {{ postagem.titulo }}</a> - {{ postagem.data_postagem }} 
+                (<a href='{{postagem.autor.get_absolute_url}}'>{{postagem.autor}}</a>)
+              </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Não há postagens</p>
+    {% endif %}
+{% endblock %}

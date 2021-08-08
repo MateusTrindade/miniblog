@@ -1,0 +1,23 @@
+{% extends "geral.html" %}
+{% block corpo %}
+    <div class='ficha-autor'>
+        <h2>{{autor.nome}}</h2>
+        <p>{{autor.bio}}</p>
+        <p>Desde {{autor.data_registro}}</p>
+    </div>
+    <div class='postagens-autor'>
+        <h3>Postagens</h3>
+        {% if autor.postagem_set.all %}
+            <ul>
+                {% for postagem in autor.postagem_set.all %}
+                <li>
+                    <a href="{{postagem.get_absolute_url}}">{{ postagem.titulo }} - 
+                    {{ postagem.data_postagem }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Não há postagens desse autor</p>
+        {% endif %}
+    </div>
+{% endblock %}

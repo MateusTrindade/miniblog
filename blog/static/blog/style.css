@@ -1,0 +1,17 @@
+li {
+  list-style: none;
+}
+
+.banner {
+  text-align: center;
+}
+
+.row .banner {
+  border: 1px solid;
+  height: 180px;
+  margin: 10px;
+}
+
+.ultimas {
+  text-align: center;
+}

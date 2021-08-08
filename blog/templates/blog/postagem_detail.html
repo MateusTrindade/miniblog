@@ -1,0 +1,30 @@
+{% extends "geral.html" %}
+{% block corpo %}
+    <div class='postagem'>
+        <h2>{{postagem.titulo}}</h2>
+        <p>{{postagem.conteudo}}</p>
+        <p>
+            Por <a href="{{postagem.autor.get_absolute_url}}">{{postagem.autor}}</a> 
+            em {{postagem.data_postagem}}
+        </p>
+    </div>
+    <div class='comentarios'>
+        <h3>Comentários</h3>
+        {% if user.is_authenticated %}
+            <p><a href="{% url 'comentario-create' postagem.id %}">Comentar</a></p>
+        {% else %}
+            <p>Faça <a href="{% url 'login'%}?next={{request.path}}">login</a></p>
+        {% endif %}
+        {% if postagem.comentario_set.all %}
+            {% for comentario in postagem.comentario_set.all %}
+                <div class='comentario'>
+                    <hr>
+                    <p>{{ comentario.conteudo }}</p>
+                    <p>Por {{ comentario.usuario}} em {{ comentario.data_comentario }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Sem comentários</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "geral.html" %}
+{% block corpo %}
+<h2>Todos os autores</h2>
+    {% if autor_list %}
+        <ul>
+            {% for autor in autor_list %}
+                <li>
+                    <a href='{{autor.get_absolute_url}}'>{{ autor.nome }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Não há autores</p>
+    {% endif %}
+{% endblock %}
