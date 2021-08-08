@@ -1,0 +1,2 @@
+# miniblog
+Blog utilizando Django
